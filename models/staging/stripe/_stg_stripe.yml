@@ -1,0 +1,36 @@
+models:
+  - name: stg_stripe__payments
+    description: Staging table for Payments
+    columns:
+      - name: payment_id
+        description: primary key
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: foreign key from orders
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_jaffle_shop__orders')
+                field: order_id
+      - name: payment_method
+        description: Payment Method used on that buy
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - bank_transfer
+                  - coupon
+                  - gift_card
+                  - credit_card
+                  - debit_card
+      - name: status
+        description: Payment Status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: 
+                  - success
+                  - fail
