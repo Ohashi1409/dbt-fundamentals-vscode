@@ -1,6 +1,6 @@
 models:
   - name: stg_stripe__payments
-    description: Staging table for Payments
+    description: one unique payment per row
     columns:
       - name: payment_id
         description: primary key
@@ -16,7 +16,7 @@ models:
                 to: ref('stg_jaffle_shop__orders')
                 field: order_id
       - name: payment_method
-        description: Payment Method used on that buy
+        description: "{{ doc('payment_method') }}"
         data_tests:
           - accepted_values:
               arguments:
@@ -27,7 +27,7 @@ models:
                   - credit_card
                   - debit_card
       - name: status
-        description: Payment Status
+        description: "{{ doc('payment_status') }}"
         data_tests:
           - accepted_values:
               arguments:

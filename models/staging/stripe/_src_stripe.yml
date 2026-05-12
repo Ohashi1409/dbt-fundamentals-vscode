@@ -5,7 +5,7 @@ sources:
     schema: stripe  
     tables:
       - name: payment
-        description: "Payment table to learn dbt"
+        description: raw payments data
         columns: 
           - name: id
             description: primary key
@@ -21,7 +21,7 @@ sources:
                     to: source('jaffle_shop', 'orders')
                     field: id
           - name: paymentmethod
-            description: payment method
+            description: "{{ doc('payment_method') }}"
             data_tests: 
               - accepted_values:
                   arguments:
@@ -32,7 +32,7 @@ sources:
                       - credit_card
                       - debit_card
           - name: status
-            description: payment status
+            description: "{{ doc('payment_status') }}"
             data_tests:
               - accepted_values: 
                   arguments: 
